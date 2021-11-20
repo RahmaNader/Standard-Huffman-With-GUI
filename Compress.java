@@ -141,16 +141,21 @@ public class Compress {
         printCode(root, "");
         writeCode();
     }
-
     private void writeCode() throws IOException {
+        double before = 0 , after = 0;
         BufferedWriter myWriter = new BufferedWriter(new FileWriter("compressedFile.txt",true)) ;
         for(int i=0; i<str.length(); i++){
             for (MyChar myChar : compressedCode) {
                 if (str.charAt(i) == myChar.getMyChar()) {
+                    after += myChar.getCharCode().length();
+                    before +=8;
                     myWriter.append(String.valueOf(myChar.getCharCode()));
                 }
             }
         }
+        System.out.println("Before: "+before);
+        System.out.println("After: "+after);
+        System.out.println("Ratio: "+(double)(before/after));
         myWriter.close();
     }
 
